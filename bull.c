@@ -564,6 +564,9 @@ static int MakeMove(Position* pos, const Move* move) {
 	const int captured = PieceTypeOn(pos, move->to);
 	const U64 to = 1ULL << move->to;
 	const U64 from = 1ULL << move->from;
+	pos->move50++;
+	if (captured != PT_NB || piece == PAWN)
+		pos->move50 = 0;
 	pos->color[0] ^= from | to;
 	pos->pieces[piece] ^= from | to;
 	if (piece == PAWN && to == pos->ep) {
@@ -875,6 +878,7 @@ static int SearchAlpha(Position* pos, int alpha, int beta, int depth, int ply, S
 	}
 	else
 		depth -= depth > 3;
+	int score;
 	int legalMoves = 0;
 	U8 tt_flag = LOWER;
 	Move moves[256];
@@ -898,7 +902,7 @@ static int SearchAlpha(Position* pos, int alpha, int beta, int depth, int ply, S
 		Position npos = *pos;
 		if (!MakeMove(&npos, &move))
 			continue;
-		int score = -SearchAlpha(&npos, -beta, -alpha, depth - 1, ply + 1, stack);
+		score = -SearchAlpha(&npos, -beta, -alpha, depth - 1, ply + 1, stack);
 		if (info.stop)
 			break;
 		legalMoves++;
@@ -1057,6 +1061,8 @@ static void UciCommand(Position* pos, char* line) {
 }
 
 static void UciLoop(Position* pos) {
+	//UciCommand(pos, "position fen 8/5Bp1/4P3/6pP/1b1k1P2/5K2/8/8 w - - 0 1");
+	//UciCommand(pos, "go movetime 3000");
 	char line[4000];
 	while (fgets(line, sizeof(line), stdin))
 		UciCommand(pos, line);
