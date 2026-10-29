@@ -20,8 +20,8 @@ FIDE-rules-compliant chess engine
 
 - Elo 2050
 - Protocol UCI
-- Single C file
-- Board bitboard
+- Single file
+- Board 128 squares
 - En passant
 - Underpromotions (knight, bishop, rook)
 - Threefold repetition
