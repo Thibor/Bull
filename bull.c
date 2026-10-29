@@ -16,7 +16,7 @@
 #define FALSE 0
 #define TRUE 1
 #define NAME "Bull"
-#define VERSION "2026-05-22"
+#define VERSION "2026-10-22"
 #define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 #define FLIP_SQ(sq) ((sq)^0b111000)
 
