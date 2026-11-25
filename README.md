@@ -18,7 +18,7 @@ FIDE-rules-compliant chess engine
 
 ## Features
 
-- Elo 2050
+- Strength 2050 elo
 - Protocol UCI
 - Single file
 - Board 128 squares
